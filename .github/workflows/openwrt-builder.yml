@@ -101,11 +101,30 @@ jobs:
         # find dl -size -1024c -exec rm -f {} \;
 
 
+
     - name: Compile the firmware
       id: compile1
       run: |
         cd openwrt
         make -j4 V=s
+        
+    - name: fix ffreadahead
+      if: (!cancelled())
+      run:  |
+        cd openwrt
+        wget https://raw.githubusercontent.com/keyfour/openwrt/2722d51c5cf6a296b8ecf7ae09e46690403a6c3d/tools/m4/patches/011-fix-sigstksz.patch -O tools/m4/patches/011-fix-sigstksz.patch
+        cd  /build_dir/host/m4-1.4.18
+        sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+        echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+
+    - name: Compile the firmware
+      id: compile
+      run: |
+        cd openwrt
+        make -j4 V=s
+
+
+
 
     - name: Check space usage
       if: (!cancelled())
