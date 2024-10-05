@@ -15,4 +15,4 @@
 
 # Add a feed source
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-echo 'src-git ua2f https://github.com/Zxilly/UA2F.git' >>feeds.conf.default
+#echo 'src-git ua2f https://github.com/Zxilly/UA2F.git' >>feeds.conf.default
