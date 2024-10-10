@@ -61,7 +61,7 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        chmod 777 openwrt
+        chmod 777 workdir/openwrt
 
     - name: Load custom feeds
       run: |
